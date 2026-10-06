@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>192.168.l.l Login Guide: Router Access and Fixes</title>
+<meta name="description" content="192.168.l.l login guide: why it is a typo of 192.168.1.1, how to access your router, change Wi-Fi name and password, find your gateway, fix login problems and stay secure.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f7fc;--paper:#ffffff;--ink:#16233a;--navy:#0a1730;--navy2:#122546;--blue:#1d6fe8;--cyan:#19c3d9;--amber:#ffb020;--line:#dbe5f2;--code:#0d1b33}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.75;font-size:17px}
+h1,h2,h3{font-family:'Space Grotesk',Inter,sans-serif;line-height:1.2;color:var(--navy)}
+a{color:var(--blue);font-weight:600;text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:#0f4fb0}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+
+header{background:var(--navy);position:sticky;top:0;z-index:20;border-bottom:2px solid var(--cyan)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px;flex-wrap:nowrap}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:1.25rem;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.logo i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px rgba(25,195,217,.25)}
+.logo span{color:var(--cyan)}
+nav{display:flex;gap:22px;align-items:center;white-space:nowrap}
+nav a{color:#c6d4ea;font-weight:500;font-size:.95rem;text-decoration:none}
+nav a:hover{color:var(--cyan)}
+.btn{display:inline-block;background:var(--blue);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:.95rem;transition:background .2s}
+.btn:hover{background:#0f4fb0;color:#fff}
+.nav .btn{padding:9px 20px;font-size:.88rem}
+
+.hero{background:linear-gradient(135deg,rgba(10,23,48,.98),rgba(18,37,70,.95)),repeating-linear-gradient(0deg,transparent 0 38px,rgba(25,195,217,.08) 38px 39px),repeating-linear-gradient(90deg,transparent 0 38px,rgba(25,195,217,.08) 38px 39px);color:#fff;padding:96px 0 90px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:70px;background:var(--paper);clip-path:ellipse(75% 100% at 50% 100%)}
+.hero h1{color:#fff;font-size:clamp(2rem,4.6vw,3.4rem);font-weight:700;max-width:920px}
+.hero h1 em{font-style:normal;color:var(--cyan)}
+.hero p.lead{max-width:800px;margin:22px 0 18px;font-size:1.12rem;color:#d4e0f2}
+.hero p.lead a{color:var(--cyan)}
+.hero p.lead a:hover{color:#fff}
+.hero code{background:rgba(25,195,217,.15);color:#8fe9f4;padding:2px 8px;border-radius:6px;font-size:.95em}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chips span{background:rgba(255,255,255,.08);border:1px solid rgba(25,195,217,.45);padding:7px 16px;border-radius:999px;font-size:.9rem}
+
+section{padding:64px 0}
+section.alt{background:var(--bg)}
+h2{font-size:clamp(1.55rem,3vw,2.1rem);margin-bottom:18px;padding-left:16px;border-left:6px solid var(--cyan)}
+h3{font-size:1.2rem;margin:0 0 8px}
+p{margin-bottom:16px;max-width:880px}
+p code,li code,summary code{background:#e6eefb;color:#0d3f91;padding:1px 7px;border-radius:6px;font-size:.93em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:26px}
+.card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--blue);border-radius:14px;padding:24px 26px}
+.card:nth-child(2n){border-top-color:var(--cyan)}
+.card p{margin:0;font-size:.97rem}
+.num{display:inline-flex;width:38px;height:38px;border-radius:10px;background:var(--navy);color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:700;align-items:center;justify-content:center;margin-bottom:12px}
+ul.check{list-style:none;margin:18px 0;max-width:880px}
+ul.check li{padding:12px 16px 12px 48px;position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+ul.check li::before{content:"✓";position:absolute;left:16px;top:11px;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;text-align:center;line-height:24px;font-size:.85rem;font-weight:700}
+.callout{background:var(--navy);color:#d4e0f2;border-radius:14px;padding:26px 30px;margin:26px 0;max-width:880px;border-left:6px solid var(--amber)}
+.callout strong{color:var(--amber)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0;max-width:880px}
+.compare div{border-radius:14px;padding:22px 26px;border:1px solid var(--line);background:#fff}
+.compare .bad{border-top:5px solid #e5484d}
+.compare .good{border-top:5px solid #1fa971}
+.compare b{display:block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.25rem;color:var(--navy);margin-bottom:4px}
+.compare small{color:#4b5b76;font-size:.95rem;line-height:1.5;display:block}
+.tablebox{overflow-x:auto;border-radius:14px;border:1px solid var(--line);margin:24px 0;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th{background:var(--navy);color:#fff;text-align:left;padding:14px 20px;font-family:'Space Grotesk',sans-serif;font-size:.98rem}
+td{padding:13px 20px;border-top:1px solid var(--line)}
+tr:nth-child(even) td{background:#f6f9fe}
+td:first-child{font-weight:600;color:var(--navy);white-space:nowrap;font-family:ui-monospace,Menlo,Consolas,monospace}
+pre{background:var(--code);color:#9ff3ff;border-radius:12px;padding:18px 24px;margin:18px 0;max-width:520px;overflow-x:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.05rem;border-left:5px solid var(--cyan)}
+.path{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 18px}
+.path span{background:var(--navy);color:#9ff3ff;padding:6px 14px;border-radius:8px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.95rem}
+.path b{color:var(--blue)}
+
+details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;max-width:980px}
+summary{cursor:pointer;padding:18px 54px 18px 22px;font-family:'Space Grotesk',sans-serif;font-size:1.03rem;font-weight:600;color:var(--navy);list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:1.5rem;color:var(--blue)}
+details[open] summary::after{content:"–"}
+details[open]{border-color:var(--blue)}
+details p{padding:0 22px;margin:0 0 18px}
+
+.cta{background:linear-gradient(135deg,var(--blue),#0f4fb0);color:#fff;text-align:center;padding:70px 0}
+.cta h2{color:#fff;border:0;padding:0}
+.cta p{margin:0 auto 26px;color:#dbe8ff}
+.cta .btn{background:var(--navy)}
+.cta .btn:hover{background:#000}
+
+footer{background:var(--navy);color:#a9bad4;padding:56px 0 24px;border-top:3px solid var(--cyan)}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px}
+footer h4{font-family:'Space Grotesk',sans-serif;color:#fff;font-size:1.05rem;margin-bottom:14px}
+footer a{color:#a9bad4;font-weight:400;text-decoration:none;display:block;margin-bottom:8px}
+footer a:hover{color:var(--cyan)}
+.social{display:flex;gap:12px;margin-top:18px}
+.social a{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;margin:0;transition:background .2s}
+.social a:hover{background:var(--blue)}
+.social svg{width:20px;height:20px;fill:#fff}
+.copy{border-top:1px solid rgba(255,255,255,.14);margin-top:36px;padding-top:20px;font-size:.88rem;text-align:center}
+
+@media(max-width:860px){nav a:not(.btn){display:none}.fgrid{grid-template-columns:1fr}.compare{grid-template-columns:1fr}section{padding:48px 0}.hero{padding:70px 0 70px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="https://192168l1.com/"><i></i>192.168<span>.l.l</span></a>
+    <nav>
+      <a href="#meaning">Meaning</a>
+      <a href="#access">How to Access</a>
+      <a href="#wifi">Wi-Fi Settings</a>
+      <a href="#fix">Fixes</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn" href="https://192168l1.com/">Router Login</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <h1>192.168.l.l Login Guide: <em>Router Access and Fixes</em></h1>
+    <p class="lead">Many people searching for their router's login page come across the address <a href="https://192168l1.com/">192.168.l.l</a>. It looks like a standard network address, but there is an important detail that often causes confusion: the last characters are lowercase letters “l”, while a standard IPv4 address uses the number “1.”</p>
+    <p class="lead">In most cases, users searching for 192.168.l.l are actually trying to access <code>192.168.1.1</code>, a private gateway address commonly used by routers and network devices. Knowing the difference can help prevent login errors and make router setup much easier.</p>
+    <p class="lead">Whether you want to change your Wi-Fi password, update network settings, check connected devices, or troubleshoot your router, understanding the correct local address is the first step.</p>
+    <a class="btn" href="#meaning">Start the Guide</a>
+    <div class="chips"><span>Typo explained</span><span>Wi-Fi name &amp; password</span><span>Login fixes</span><span>Security tips</span></div>
+  </div>
+</div>
+
+<section id="meaning">
+  <div class="wrap">
+    <h2>What Does 192.168.l.l Mean?</h2>
+    <p>The term 192.168.l.l is generally a mistyped version of 192.168.1.1.</p>
+    <div class="compare">
+      <div class="bad"><b>192.168.l.l</b><small>Lowercase letters “l”. Not a valid IPv4 address.</small></div>
+      <div class="good"><b>192.168.1.1</b><small>Numbers “1”. A private gateway address used by many routers.</small></div>
+    </div>
+    <p>IPv4 addresses consist of four numerical sections separated by periods. Because the letter “l” can look very similar to the number “1,” users sometimes enter the wrong character when typing or copying a router address.</p>
+    <p>The corrected address may open a router's local administration page if the router is configured to use it.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Why Is 192.168.1.1 Used by Routers?</h2>
+    <p>Private IP addresses are used for communication within local networks. A router can use a private address as its gateway, allowing devices connected to the network to communicate with the router.</p>
+    <p>The router's administration interface may also be available through this local address. However, not every router uses 192.168.1.1.</p>
+    <div class="callout"><strong>Not universal:</strong> Some devices use different private gateways, so users should not assume that 192.168.1.1 is universal.</div>
+  </div>
+</section>
+
+<section id="access">
+  <div class="wrap">
+    <h2>How to Correctly Access the Router</h2>
+    <p>If you typed 192.168.l.l, replace both lowercase l characters with the number 1.</p>
+    <p>Enter the following into your browser's address bar:</p>
+    <pre>192.168.1.1</pre>
+    <p>Before doing this, make sure your device is connected to the router's Wi-Fi network or directly connected through Ethernet.</p>
+    <p>If the router uses 192.168.1.1, its login screen should appear. You can then enter the administrator credentials associated with the device.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Do Not Search for the IP Address</h2>
+    <p>A common mistake is entering the router address into a search engine instead of the browser's address bar.</p>
+    <p>A local IP address should be entered directly into the address bar. You are trying to communicate with a device on your own network, not search the public internet for a website.</p>
+    <p>If your browser automatically performs a web search, check that you have entered the address in the correct location.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What Can You Do Inside the Router Dashboard?</h2>
+    <p>The router administration interface can contain a wide range of settings. The available features depend on the manufacturer and model.</p>
+    <p>Typical options include wireless configuration, network security, connected-device information, LAN settings, DHCP configuration, DNS settings, guest networks, firmware management, and administrator credentials.</p>
+    <p>For everyday users, the most common tasks involve changing the Wi-Fi name and password or checking which devices are connected to the network.</p>
+    <div class="callout"><strong>Be careful:</strong> Advanced settings should be changed carefully because an incorrect configuration can interrupt network access.</div>
+  </div>
+</section>
+
+<section class="alt" id="wifi">
+  <div class="wrap">
+    <h2>How to Change Your Wi-Fi Name</h2>
+    <p>The Wi-Fi network name is normally called the SSID.</p>
+    <p>After logging into the router, look for a menu such as:</p>
+    <div class="path"><span>Wireless</span><b>→</b><span>Wi-Fi Settings</span><b>→</b><span>WLAN</span><b>→</b><span>SSID</span></div>
+    <p>The exact wording varies between router interfaces.</p>
+    <p>Enter your preferred network name and save the configuration. Depending on the router, connected devices may temporarily disconnect after the change.</p>
+    <p>A simple network name can make it easier to identify your own Wi-Fi, particularly when several nearby networks are visible.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How to Change Your Wi-Fi Password</h2>
+    <p>Changing the wireless password is another common reason to access a router's dashboard.</p>
+    <p>Find the wireless security section and locate the password or security-key field. Enter a strong password and save the new configuration.</p>
+    <p>Afterward, devices already connected to the network may need to reconnect using the updated password.</p>
+    <p>Use a password that is difficult to guess and avoid using easily identifiable personal information.</p>
+  </div>
+</section>
+
+<section class="alt" id="fix">
+  <div class="wrap">
+    <h2>What If 192.168.1.1 Does Not Open?</h2>
+    <p>Correcting 192.168.l.l to 192.168.1.1 does not guarantee that the login page will appear.</p>
+    <p>The router may use another gateway address, or your device may not be connected to the correct network. For a clear walkthrough of access problems, you can follow this <a href="https://192168l1.com/">router login and fixes guide</a>.</p>
+    <p><strong>Try these basic checks:</strong></p>
+    <ul class="check">
+      <li>Confirm the device is connected to the intended router.</li>
+      <li>Check that you entered the number 1, not the letter l.</li>
+      <li>Enter the address directly into the browser address bar.</li>
+      <li>Try another browser.</li>
+      <li>Temporarily disconnect from a VPN if it interferes with local access.</li>
+      <li>Restart the router and reconnect.</li>
+      <li>Try an Ethernet connection if available.</li>
+      <li>Check the device's default gateway.</li>
+    </ul>
+    <p>If the router uses another gateway, 192.168.1.1 will not open its administration interface.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How to Find the Correct Gateway on Windows</h2>
+    <p>If you are using Windows, finding the router's actual gateway is relatively simple.</p>
+    <p>Open Command Prompt and type:</p>
+    <pre>ipconfig</pre>
+    <p>Press Enter and look for the active network connection.</p>
+    <p>You should see information such as the IP address, subnet mask, and Default Gateway.</p>
+    <p>The Default Gateway is often the local address used to communicate with the router.</p>
+    <p>This method is particularly useful when the router's address has been changed from its original configuration.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>192.168.l.l Login Problems Caused by Credentials</h2>
+    <p>Sometimes the address works but the login credentials do not.</p>
+    <p>Remember that the router administrator password and Wi-Fi password may be completely different. The Wi-Fi password lets devices join the wireless network, while the administrator credentials provide access to router configuration settings.</p>
+    <p>If the administrator password has been changed previously, an old default password may no longer work.</p>
+    <p>Check the router's documentation for model-specific recovery instructions. Avoid repeatedly guessing passwords if you are unsure of the correct credentials.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What Happens If You Forget the Admin Password?</h2>
+    <p>If you have forgotten the administrator password, check whether your router manufacturer provides a recovery method.</p>
+    <p>Some routers may require a reset if the password cannot be recovered. A factory reset should be approached carefully because it can remove customized settings.</p>
+    <p>After a reset, you may need to configure the wireless network, internet connection, administrator credentials, and other preferences again.</p>
+    <p>Before resetting, consider whether you have the information necessary to set up the router afterward.</p>
+  </div>
+</section>
+
+<section class="alt" id="security">
+  <div class="wrap">
+    <h2>192.168.l.l and Router Security</h2>
+    <p>Correct router access is only part of network management. Security should also be considered once you reach the administration panel.</p>
+    <p>A strong and unique administrator password can help protect the router's settings. If the router supports secure modern wireless protocols, use an appropriate configuration rather than outdated security options.</p>
+    <p>It is also useful to keep router firmware updated when legitimate updates are provided by the manufacturer.</p>
+    <p>Do not share administrator credentials unnecessarily, and avoid giving unknown people access to the router's configuration interface.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Common Router Addresses to Know</h2>
+    <p>Although 192.168.1.1 is common, it is not the only private gateway that routers may use.</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Address</th><th>Possible Use</th></tr></thead>
+        <tbody>
+          <tr><td>192.168.1.1</td><td>Common router administration gateway</td></tr>
+          <tr><td>192.168.0.1</td><td>Another frequently used router gateway</td></tr>
+          <tr><td>192.168.1.254</td><td>Possible local gateway on some networks</td></tr>
+          <tr><td>10.0.0.1</td><td>Common private network gateway</td></tr>
+          <tr><td>192.168.l.l</td><td>Incorrect letter-based version of 192.168.1.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The correct address is determined by your actual network configuration.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Useful Router Management Practices</h2>
+    <p>Once you have successfully accessed the router, a few good habits can make future troubleshooting easier.</p>
+    <p>Keep important network details in a secure location, especially if you have customized the router extensively. Record the Wi-Fi configuration before making major changes so you know how to restore it if something goes wrong.</p>
+    <p>It is also useful to periodically review connected devices and remove configurations that are no longer necessary.</p>
+    <p>Avoid changing DHCP, DNS, LAN, WAN, or other advanced settings unless you understand the effect they may have on your network.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>When Should You Get Technical Help?</h2>
+    <p>Basic problems such as typing the wrong address or connecting to the wrong Wi-Fi network can often be fixed quickly.</p>
+    <p>Professional or manufacturer support may be more appropriate when the router repeatedly loses connectivity, the administration interface cannot be reached despite using the correct gateway, configuration changes have caused network failure, or you cannot recover legitimate administrator access.</p>
+    <p>Having the router's exact model number available can make technical support much more effective.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Conclusion</h2>
+    <p>The term 192.168.l.l is most commonly associated with a simple but confusing typing mistake. The lowercase letter “l” should generally be replaced with the number “1”, resulting in 192.168.1.1.</p>
+    <p>If your router uses that address, entering it directly into your browser while connected to the correct network can open the administration interface. From there, you may be able to manage Wi-Fi settings, passwords, connected devices, security options, and other network configurations.</p>
+    <p>However, not every router uses 192.168.1.1. If the address does not work, checking your device's Default Gateway is a better approach than repeatedly trying different addresses.</p>
+    <p>By using the correct gateway, protecting administrator credentials, and making configuration changes carefully, you can manage your router more confidently and avoid many common login and connectivity problems.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Frequently Asked Questions</h2>
+    <details open><summary>1. Is 192.168.l.l a correct IP address?</summary><p>No. The lowercase letter “l” is not a numerical IPv4 value. In most cases, users mean 192.168.1.1 when they type 192.168.l.l.</p></details>
+    <details><summary>2. What should I type instead of 192.168.l.l?</summary><p>If your router uses the common gateway, enter 192.168.1.1 using the number one in both positions.</p></details>
+    <details><summary>3. Can I access 192.168.1.1 from my phone?</summary><p>Yes, if your phone is connected to the router's local Wi-Fi network and the router uses 192.168.1.1 as its gateway. Open a browser and enter the address directly.</p></details>
+    <details><summary>4. Why does 192.168.1.1 show an error?</summary><p>The router may use a different gateway, your device may be connected to another network, or there may be a temporary network or router issue.</p></details>
+    <details><summary>5. How can I find my router's IP address?</summary><p>On Windows, open Command Prompt and use <code>ipconfig</code>. The Default Gateway shown for the active connection is commonly the router's local address.</p></details>
+    <details><summary>6. Can I change my Wi-Fi password through the router login page?</summary><p>Yes, provided your router's administration interface includes wireless settings. Look for Wireless, Wi-Fi, WLAN, or Security settings.</p></details>
+    <details><summary>7. Is the router admin password the same as the Wi-Fi password?</summary><p>Not necessarily. They can be separate credentials with different purposes. The administrator password protects router settings, while the Wi-Fi password controls wireless access.</p></details>
+    <details><summary>8. What should I do if I forget my router admin password?</summary><p>Check the manufacturer's recovery instructions first. A factory reset may be available on some devices, but it can erase your customized configuration.</p></details>
+    <details><summary>9. Is 192.168.1.1 available from the internet?</summary><p>It is a private network address and is generally used within the local network rather than as a public internet destination.</p></details>
+    <details><summary>10. Is it safe to change router settings?</summary><p>Yes, when you understand the settings and are authorized to manage the router. Be particularly careful with advanced LAN, WAN, DHCP, DNS, and security configurations because incorrect changes can disrupt network connectivity.</p></details>
+  </div>
+</section>
+
+<div class="cta">
+  <div class="wrap">
+    <h2>Get Into Your Router Without the Guesswork</h2>
+    <p>Use the correct address, log in securely, and fix access problems step by step.</p>
+    <a class="btn" href="https://192168l1.com/">Open the Router Guide</a>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>192.168.l.l</h4>
+        <p style="max-width:380px">Clear router login, setup and troubleshooting guides, so you can reach your admin page and keep your network secure.</p>
+        <div class="social">
+          <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.9.4-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.7H7.7v3.3h2.7V22z"/></svg></a>
+          <a href="https://x.com/" aria-label="X" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
+          <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.3-3.2a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a>
+          <a href="https://www.youtube.com/" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+          <a href="https://www.linkedin.com/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4.5 3a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6zM3 8.5h3V21H3zM9 8.5h2.9v1.7c.5-.9 1.7-2 3.6-2 3.2 0 3.9 2.1 3.9 4.8V21h-3v-7c0-1.5 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="https://192168l1.com/">Home</a>
+        <a href="#meaning">What It Means</a>
+        <a href="#access">How to Access</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>Guide</h4>
+        <a href="#wifi">Wi-Fi Settings</a>
+        <a href="#fix">Login Fixes</a>
+        <a href="#security">Router Security</a>
+      </div>
+    </div>
+    <div class="copy">© 2026 192.168.l.l. All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>
